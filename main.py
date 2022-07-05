@@ -16,6 +16,7 @@ def writeJson(dictionary, filename):
         w.close()
 
 def login(users, username, password):
+    global loggedIn
     for user in users:
         if username == user.username and password == user.password:
             loggedIn = True
@@ -47,12 +48,16 @@ class Student:
 users = [User("jack", "jack123"), User("Jack","jack123")]
 students = []
 def inputScores(name, lname, paper1, paper2, paper3):
-    if loggedIn ==False:
-        tk.messagebox.showinfo("Authentication error", "You  must be logged in!")
-    else:
+    global loggedIn
+    print(loggedIn)
+    if loggedIn ==True:
         print("Name: " , name, lname, "\n", "Total for score: " , (paper1 + paper2 + paper3))
         student = Student(name, lname, paper1, paper2, paper3)
         students.append(student)
+        tk.messagebox.showinfo("Authentication error", "You  must be logged in!")
+        
+    else:
+        tk.messagebox.showinfo("Authentication error", "You  must be logged in!")
         
 
     

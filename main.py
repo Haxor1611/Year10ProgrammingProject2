@@ -1,7 +1,13 @@
 from asyncore import write
 import tkinter as tk
 import json
+
+
+
+
 loggedIn = False
+
+
 
 def loadJson(filename):
     with open(filename, "r") as r:
@@ -49,10 +55,7 @@ class Student:
     def calcpercent(self):
         total = self.paper1 + self.paper2 + self.paper3
         percentage = int((total/240) * 100)
-        if percentage > 90:
-            self.grade = 9
-        elif percentage > 80:
-            self.grade = 8
+        self.grade = int((percentage/10) + 0.12)
         return percentage
         
 #users = loadJson("users.json")
@@ -64,7 +67,7 @@ def inputScores(name, lname, paper1, paper2, paper3):
     if loggedIn ==True:
         print("Name: " , name, lname, "\n", "Total for score: " , (paper1 + paper2 + paper3))
         student = Student(name, lname, paper1, paper2, paper3)
-        print(str(student.calcpercent()) + "%")
+        print(str(student.calcpercent()) + "%" + "Grade: " + str(student.grade))
         students.append(student.__dict__)
         
         tk.messagebox.showinfo("Authentication error", "Submitted scores for: " + name)

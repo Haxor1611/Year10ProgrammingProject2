@@ -1,6 +1,8 @@
 from asyncore import write
 import tkinter as tk
 import json
+from tkinter import NO, ttk
+from tkinter import *
 
 
 
@@ -9,16 +11,11 @@ loggedIn = False
 
 
 
-def loadJson(filename):
-    with open(filename, "r") as r:
-        jsons = r.readlines()
-        json.loads(jsons)
-        r.close()
-        return json
+
 
 def writeJson(dictionary, filename):
     with open(filename, "w") as w:
-        jsonencoded = json.dumps(dictionary)
+        jsonencoded = json.dumps(dictionary,indent=3)
         w.write(jsonencoded)
         w.close()
 
@@ -56,9 +53,10 @@ class Student:
         total = self.paper1 + self.paper2 + self.paper3
         percentage = int((total/240) * 100)
         self.grade = int((percentage/10) + 0.06)
+        self.percentage = percentage
         return percentage
         
-#users = loadJson("users.json")
+
 users = [User("jack", "jack123"), User("Jack","jack123")]
 students = []
 def inputScores(name, lname, paper1, paper2, paper3):
@@ -76,11 +74,21 @@ def inputScores(name, lname, paper1, paper2, paper3):
         tk.messagebox.showinfo("Authentication error", "You  must be logged in!")
         
 
-def completedScores():
+def completedScores(master):
     print(students)
     studentObj = Students(students)
     print(studentObj.__dict__)
     writeJson(studentObj.__dict__, "students.json")
+
+def getColumn(columnNumber):
+    column = []
+    for student in students:
+        student = student.__dict__
+        column.append(student[columnNumber])
+
+    
+
+
 
 def draw():
     master = tk.Tk()
@@ -106,7 +114,7 @@ def draw():
     e5.grid(row=5, column=4,pady=2)
 
     button = tk.Button(master, text="Submit scores", width=30,pady=5, command=lambda: inputScores(str(e1.get()), str(e2.get()), int(e3.get()), int(e4.get()), int(e5.get()))).grid(row=9, column=4)
-    completeButton = tk.Button(master, text= "Completed Adding scores", width=19, padx=20, command=completedScores).grid(row=10, column=4,pady=15)
+    completeButton = tk.Button(master, text= "Completed Adding scores", width=19, padx=20, command= lambda : completedScores(master)).grid(row=10, column=4,pady=15)
 
 
 
@@ -121,4 +129,7 @@ def draw():
 
     loginButton = tk.Button(master, text="Login", width = 30,pady=5, command = lambda: login(users, str(usernameinput.get()), str(passwordinput.get()))).grid(row=15, column=4,pady=2)
     
+   
+
 draw()
+

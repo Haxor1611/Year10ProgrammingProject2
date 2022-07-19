@@ -3,11 +3,34 @@ import tkinter as tk
 import json
 from tkinter import NO, ttk
 from tkinter import *
+import sqlite3
 
-
-
+from sqlite3 import Error
 
 loggedIn = False
+studentNumber = 0
+
+def sql_connection():
+
+    try:
+
+        con = sqlite3.connect('mydatabase.db')
+
+        return con
+
+    except Error:
+
+        print(Error)
+
+def sql_table(con, students):
+
+    cursorObj = con.cursor()
+
+    cursorObj.execute("CREATE TABLE Students(id integer PRIMARY KEY, firstName text, secondName text, paper1 int, paper2 int, paper3 int, total int, percentage int, grade int)")
+
+    con.commit()
+    for student in students:
+        insertIntoTable(cursorObj, student)
 
 
 
@@ -48,6 +71,7 @@ class Student:
         self.paper1 = paper1
         self.paper2 = paper2
         self.paper3 = paper3
+        self.total = paper1 + paper2 + paper3
         
     def calcpercent(self):
         total = self.paper1 + self.paper2 + self.paper3
@@ -63,26 +87,30 @@ class Student:
 
 users = [User("jack", "jack123"), User("Jack","jack123")]
 students = []
+studentClassList = []
 def inputScores(name, lname, paper1, paper2, paper3):
     global loggedIn
     print(loggedIn)
     if loggedIn ==True:
+        
         print("Name: " , name, lname, "\n", "Total for score: " , (paper1 + paper2 + paper3))
         student = Student(name, lname, paper1, paper2, paper3)
         print(str(student.calcpercent()) + "%" + "Grade: " + str(student.grade))
         students.append(student.__dict__)
-        
+        studentClassList.append(student)
         tk.messagebox.showinfo("Authentication error", "Submitted scores for: " + name)
         
     else:
         tk.messagebox.showinfo("Authentication error", "You  must be logged in!")
         
-
+def insertIntoTable(obj, student):
+    obj.execute("INSERT INTO students VALUES(" + str(studentNumber) + ", " + str(student.fname) + ", " + str(student.lname) + ', ' + str(student.paper1) + ", " + str(student.paper2) + ", " + str(student.paper3), + ", " + str(student.total) + ", " + str(student.percentage) + ", " + str(student.grade) + ")")
 def completedScores(master):
     print(students)
     studentObj = Students(students)
     print(studentObj.__dict__)
     writeJson(studentObj.__dict__, "students.json")
+    sql_table(con, studentClassList)
 
 def getColumn(columnNumber):
     column = []
@@ -136,4 +164,5 @@ def draw():
    
 
 draw()
+con = sql_connection()
 

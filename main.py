@@ -52,9 +52,13 @@ class Student:
     def calcpercent(self):
         total = self.paper1 + self.paper2 + self.paper3
         percentage = int((total/240) * 100)
-        self.grade = int((percentage/10) + 0.06)
+        if percentage < 90:
+            self.grade = int((percentage/10) + 0.5)
+        else:
+            self.grade = int(percentage/10)
         self.percentage = percentage
         return percentage
+
         
 
 users = [User("jack", "jack123"), User("Jack","jack123")]

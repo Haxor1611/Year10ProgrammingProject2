@@ -1,58 +1,31 @@
 {
    "students": [
       {
-         "fname": "s", 
-         "percentage": 37, 
-         "grade": 3, 
-         "lname": "s", 
-         "paper1": 23, 
-         "paper2": 12, 
-         "paper3": 54
+         "paper2": 67, 
+         "paper3": 70, 
+         "paper1": 73, 
+         "percentage": 87, 
+         "lname": "kay", 
+         "fname": "jack", 
+         "grade": 9
       }, 
       {
-         "fname": "s", 
-         "percentage": 37, 
-         "grade": 3, 
-         "lname": "s", 
-         "paper1": 23, 
-         "paper2": 12, 
-         "paper3": 54
+         "paper2": 67, 
+         "paper3": 70, 
+         "paper1": 73, 
+         "percentage": 87, 
+         "lname": "kay", 
+         "fname": "jack", 
+         "grade": 9
       }, 
       {
-         "fname": "s", 
-         "percentage": 37, 
-         "grade": 3, 
-         "lname": "s", 
-         "paper1": 23, 
-         "paper2": 12, 
-         "paper3": 54
-      }, 
-      {
-         "fname": "s", 
-         "percentage": 37, 
-         "grade": 3, 
-         "lname": "s", 
-         "paper1": 23, 
-         "paper2": 12, 
-         "paper3": 54
-      }, 
-      {
-         "fname": "s", 
-         "percentage": 37, 
-         "grade": 3, 
-         "lname": "s", 
-         "paper1": 23, 
-         "paper2": 12, 
-         "paper3": 54
-      }, 
-      {
-         "fname": "s", 
-         "percentage": 37, 
-         "grade": 3, 
-         "lname": "s", 
-         "paper1": 23, 
-         "paper2": 12, 
-         "paper3": 54
+         "paper2": 67, 
+         "paper3": 70, 
+         "paper1": 73, 
+         "percentage": 87, 
+         "lname": "kay", 
+         "fname": "jack", 
+         "grade": 9
       }
    ]
 }
